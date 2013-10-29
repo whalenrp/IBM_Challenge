@@ -61,6 +61,7 @@ def main(args):
 	myLearner = learn(variables["trainingInputFile"],variables["testInputFile"],
 		variables["machineReadable"])
 	
+	classify(myLearner)
 
 def learn(trainingInputFile, testInputFile, isMachineReadable):
 	"""
