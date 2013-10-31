@@ -8,22 +8,22 @@ class AbstractLearner:
 	files that will be handled here.
 	"""
 	
-	def __init__(self, trainingInputFile, testInputFile, isMachineReadable):
+	def __init__(self, trainingInputFile, testInputFile, isMachineReadable, outputFile):
 		self.trainingInputFile = trainingInputFile
 		self.testInputFile = testInputFile
 		self.isMachineReadable = isMachineReadable
-		self.trainingData = self.__processTrainingInput()
-		self.testData = self.__processTestingInput()
+		self.outputFile = outputFile
+		self.trainingData = self.__processFileInput(self.trainingInputFile)
+		self.testData = self.__processFileInput(self.testInputFile)
 
-	def __processTrainingInput(self):
+	def __processFileInput(self, filename):
 		"""
 		Read from trainingInputFile and return a list of lists containing the data.
 		Since IO is expensive, this function is 'private' although the concept doesn't 
-		really exist in Python ... These functions may be consolidated if the data 
-		is clean enough
+		really exist in Python...
 		"""
 		mResult = list()
-		mData = open(self.trainingInputFile, 'r')
+		mData = open(filename, 'r')
 		mLine = mData.readline()
 		rowCount = 0
 		while mLine:
@@ -33,14 +33,6 @@ class AbstractLearner:
 			rowCount += 1
 		return mResult
 
-	def __processTestingInput(self):
-		"""
-		Read from testInputFile and return a list of lists containing the data.
-		Since IO is expensive, this function is 'private' although the concept doesn't 
-		really exist in Python ...
-		"""
-		return list()
-	
 	def __printListofLists(self, mListofLists):
 		[print(x) for x in mListofLists]
 
@@ -48,7 +40,7 @@ class AbstractLearner:
 		self.__printListofLists(self.trainingData)
 
 	def printTestingInput(self):
-		self.__printListofLists(self, self.testData)
+		self.__printListofLists(self.testData)
 
 	def learn(self):
 		print("Error: Directly called the abstract implementation")
