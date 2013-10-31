@@ -24,6 +24,7 @@ class AbstractLearner:
 		self.outputFile = outputFile
 		self.trainingData = self.__processFileInput(self.trainingInputFile)
 		self.testData = self.__processFileInput(self.testInputFile)
+		self.headerList = list()
 
 	def __processFileInput(self, filename):
 		"""
@@ -33,6 +34,16 @@ class AbstractLearner:
 		"""
 		mResult = list()
 		mData = open(filename, 'r')
+
+		""" If the first character in the file is '*', save the first row for header info """
+		firstChar = mData.read(1)
+		if firstChar is '*':
+			self.headerList = mData.readLine().strip().split()
+		else:
+			mData.seek(0)
+		
+
+		""" Loop over the file, reading in a line and making every row into a list. """
 		mLine = mData.readline()
 		rowCount = 0
 		while mLine:
@@ -40,6 +51,7 @@ class AbstractLearner:
 			[mResult[rowCount].append(x) for x in mLine.strip().split(',')]
 			mLine = mData.readline()
 			rowCount += 1
+
 		return mResult
 
 	def __printListofLists(self, mListofLists):
