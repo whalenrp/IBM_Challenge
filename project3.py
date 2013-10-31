@@ -57,7 +57,7 @@ def main(args):
 	print "MachineReadable? :", variables["machineReadable"]
 
 	" Put some logic here for choosing a derived implementation of the base "
-	" class. Maybe accept another command-line parameter?"
+	" class. Maybe accept another command-line parameter for this?"
 	myLearner = learn(variables["trainingInputFile"],variables["testInputFile"],
 		variables["machineReadable"])
 	
@@ -71,6 +71,7 @@ def learn(trainingInputFile, testInputFile, isMachineReadable):
 	machine_readable_classifier by main).
 	"""
 	myLearner = RandomForestLearner(trainingInputFile,testInputFile,isMachineReadable)
+	myLearner.printTrainingInput()
 	myLearner.learn()
 	return myLearner
 

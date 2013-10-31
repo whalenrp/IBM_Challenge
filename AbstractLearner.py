@@ -1,3 +1,4 @@
+from __future__ import print_function
 
 class AbstractLearner:
 	"""
@@ -21,7 +22,16 @@ class AbstractLearner:
 		really exist in Python ... These functions may be consolidated if the data 
 		is clean enough
 		"""
-		return list()
+		mResult = list()
+		mData = open(self.trainingInputFile, 'r')
+		mLine = mData.readline()
+		rowCount = 0
+		while mLine:
+			mResult.append(list())
+			[mResult[rowCount].append(x) for x in mLine.strip().split(',')]
+			mLine = mData.readline()
+			rowCount += 1
+		return mResult
 
 	def __processTestingInput(self):
 		"""
@@ -30,9 +40,18 @@ class AbstractLearner:
 		really exist in Python ...
 		"""
 		return list()
+	
+	def __printListofLists(self, mListofLists):
+		[print(x) for x in mListofLists]
+
+	def printTrainingInput(self):
+		self.__printListofLists(self.trainingData)
+
+	def printTestingInput(self):
+		self.__printListofLists(self, self.testData)
 
 	def learn(self):
-		print "Error: Directly called the abstract implementation"
+		print("Error: Directly called the abstract implementation")
 
 	def classify(self):
-		print "Error: Directly called the abstract implementation"
+		print("Error: Directly called the abstract implementation")
