@@ -9,7 +9,16 @@ class AbstractLearner:
 	"""
 	
 	def __init__(self, trainingInputFile, testInputFile, isMachineReadable, outputFile):
-		self.trainingInputFile = trainingInputFile
+		"""
+		trainingInputFile - the string filename for training data input
+		testInputFile     - the string filename for testing data input
+		isMachineReadable - boolean
+		outputFile        - the string filename for output
+		trainingData      - a list of lists read from trainingInputFile. Each element 
+			of this list is a list containing every element of the i'th row
+		testData          - same as trainingData but for test evaluation data
+		"""
+		self.trainingInputFile = trainingInputFile 
 		self.testInputFile = testInputFile
 		self.isMachineReadable = isMachineReadable
 		self.outputFile = outputFile
@@ -19,8 +28,8 @@ class AbstractLearner:
 	def __processFileInput(self, filename):
 		"""
 		Read from trainingInputFile and return a list of lists containing the data.
-		Since IO is expensive, this function is 'private' although the concept doesn't 
-		really exist in Python...
+		Since IO is expensive, this function is 'private' and should not be called except in
+		constructors.
 		"""
 		mResult = list()
 		mData = open(filename, 'r')
