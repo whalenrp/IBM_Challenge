@@ -48,7 +48,7 @@ class AbstractLearner:
 		rowCount = 0
 		while mLine:
 			mResult.append(list())
-			[mResult[rowCount].append(x) for x in mLine.strip().split(',')]
+			[mResult[rowCount].append(float(x)) for x in mLine.strip().split(',')]
 			mLine = mData.readline()
 			rowCount += 1
 

@@ -22,15 +22,13 @@ class RandomForestLearner(AbstractLearner):
 		del self.randForest[:] # Empty the list of previous contents
 		randomGen = Random()
 		numRows = len(self.trainingData)
-		for i in range(numRows): # The number of random trees in forest
+		for _ in range(numRows): # The number of random trees in forest
 			data = list()
 			for _ in range(numRows): # Generate the random tree itself
 				randomNum = randomGen.randrange(numRows)
-				data.append(self.trainingData[randomGen])
+				data.append(self.trainingData[randomNum])
 			self.randForest.append(self.makeTree(data))
 		
-		print "Function not yet Defined"
-		sys.exit(0)
 
 	def classify(self):
 		"""
@@ -45,5 +43,10 @@ class RandomForestLearner(AbstractLearner):
 		"""
 		Returns a tree created from the given data.
 		"""
+		
+		# transpose and sort data
+		sortedColumns = [sorted(list(a)) for a in zip(*data)]
+		
+			
 		print "Function not yet Defined"
 		sys.exit(0)
