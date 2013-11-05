@@ -78,7 +78,6 @@ def learn(trainingInputFile, testInputFile, isMachineReadable, outputFile):
 	machine_readable_classifier by main).
 	"""
 	myLearner = RandomForestLearner(trainingInputFile,testInputFile,isMachineReadable,outputFile)
-	myLearner.printTrainingInput()
 	myLearner.learn()
 	return myLearner
 

@@ -22,11 +22,11 @@ class AbstractLearner:
 		self.testInputFile = testInputFile
 		self.isMachineReadable = isMachineReadable
 		self.outputFile = outputFile
-		self.trainingData = self.__processFileInput(self.trainingInputFile)
-		self.testData = self.__processFileInput(self.testInputFile)
+		self.trainingData = self.__processTrainingInput(self.trainingInputFile)
+		self.testData = self.__processTestInput(self.testInputFile)
 		self.headerList = list()
 
-	def __processFileInput(self, filename):
+	def __processTrainingInput(self, filename):
 		"""
 		Read from trainingInputFile and return a list of lists containing the data.
 		Since IO is expensive, this function is 'private' and should not be called except in
@@ -48,20 +48,45 @@ class AbstractLearner:
 		rowCount = 0
 		while mLine:
 			mResult.append(list())
-			[mResult[rowCount].append(float(x)) for x in mLine.strip().split(',')]
+			[mResult[rowCount].append(x) for x in mLine.strip().split(',')]
 			mLine = mData.readline()
 			rowCount += 1
+		
+		# Process continously valued variables as floats
+		for i in range(len(mResult)):
+			for j in range(len(mResult[i])-1):
+				mResult[i][j] = float(mResult[i][j])
 
 		return mResult
 
-	def __printListofLists(self, mListofLists):
+	def __processTestInput(self, filename):
+		"""
+		Read from trainingInputFile and return a list of lists containing the data.
+		Since IO is expensive, this function is 'private' and should not be called except in
+		constructors.
+		"""
+		mResult = list()
+		mData = open(filename, 'r')
+
+		""" Loop over the file, reading in a line and making every row into a list. """
+		mLine = mData.readline()
+		rowCount = 0
+		while mLine:
+			mResult.append(list())
+			[mResult[rowCount].append(float(x)) for x in mLine.strip().split(',')]
+			mLine = mData.readline()
+			rowCount += 1
+		
+		return mResult
+
+	def printListofLists(self, mListofLists):
 		[print(x) for x in mListofLists]
 
 	def printTrainingInput(self):
-		self.__printListofLists(self.trainingData)
+		self.printListofLists(self.trainingData)
 
 	def printTestingInput(self):
-		self.__printListofLists(self.testData)
+		self.printListofLists(self.testData)
 
 	def learn(self):
 		print("Error: Directly called the abstract implementation")

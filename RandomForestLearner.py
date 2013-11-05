@@ -22,12 +22,13 @@ class RandomForestLearner(AbstractLearner):
 		del self.randForest[:] # Empty the list of previous contents
 		randomGen = Random()
 		numRows = len(self.trainingData)
-		for _ in range(numRows): # The number of random trees in forest
-			data = list()
-			for _ in range(numRows): # Generate the random tree itself
-				randomNum = randomGen.randrange(numRows)
-				data.append(self.trainingData[randomNum])
-			self.randForest.append(self.makeTree(data))
+#		for _ in range(numRows): # The number of random trees in forest
+#			data = list()
+#			for _ in range(numRows): # Generate the random tree itself
+#				randomNum = randomGen.randrange(numRows)
+#				data.append(self.trainingData[randomNum])
+#			self.randForest.append(self.makeTree(data))
+		self.makeTree(self.trainingData)
 		
 
 	def classify(self):
@@ -44,8 +45,20 @@ class RandomForestLearner(AbstractLearner):
 		Returns a tree created from the given data.
 		"""
 		
-		# transpose and sort data
-		sortedColumns = [sorted(list(a)) for a in zip(*data)]
+		# transpose data
+		columns = [list(a) for a in zip(*data)]
+
+		
+		self.printListofLists(columns)
+		
+		# Zip up the continuously valued variables with their classifications and
+		# sort by the continuous variables. Then, find the best split of the row
+		# for each variable and decide to split on the best variable overall.
+		for i in range(len(columns)-1):
+			tuplesList = sorted(zip(columns[i], columns[len(columns)-1]))
+			for j in range(len(tuplesList)):
+				
+			print(tuplesList)
 		
 			
 		print "Function not yet Defined"
