@@ -54,20 +54,28 @@ class BaggingLearner(AbstractLearner):
 		# Zip up the continuously valued variables with their classifications and
 		# sort by the continuous variables. Then, find the best split of the row
 		# for each variable and decide to split on the best variable overall.
+		bestSplitOverall = (-1, 0, 0) # (column, splitValue, score)
 		for i in range(len(columns)-1):
-			bestSplit = (0, 0) # The best split so far is tracked by (index, score)
 			tuplesList = sorted(zip(columns[i], columns[len(columns)-1]))
 			totalRowValue = 0
 			for j in range(len(tuplesList)):
-				print (tuplesList[j][1])
-				if tuplesList[j][1]:
-					print("true")
-					totalRowValue += 1
-				else:
-					print("false")
-					totalRowValue -= 1
+				totalRowValue += 1 if tuplesList[j][1] else -1
 
-			print(tuplesList, totalRowValue)
+			bestSplit = (0, abs(totalRowValue)) # The best split so far is tracked by (index, score)
+			curScore = 0
+			prevElement = tuplesList[0][0]
+			for j in range(1, len(tuplesList)):
+				curScore += 1 if tuplesList[j-1][1] else -1
+				scoreRightOfSplit = totalRowValue - curScore
+				if tuplesList[j][0] != prevElement and abs(curScore - scoreRightOfSplit) > bestSplit[1]:
+					bestSplit = (j, abs(curScore - scoreRightOfSplit))
+				prevElement = tuplesList[j][0]
+			if i == 0:
+				bestSplitOverall = (0, tuplesList[bestSplit[0]][0], bestSplit[1])
+			elif bestSplit[1] > bestSplitOverall[2]:
+				bestSplitOverall = (i, tuplesList[bestSplit[0]][0], bestSplit[1])
+
+			print(tuplesList, bestSplit, bestSplitOverall)
 		
 			
 		print "Function not yet Defined"
