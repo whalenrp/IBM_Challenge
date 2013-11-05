@@ -2,10 +2,10 @@ import sys
 from AbstractLearner import AbstractLearner
 from random import Random
 
-class RandomForestLearner(AbstractLearner):
+class BaggingLearner(AbstractLearner):
 	"""
 	Derived class implementation of AbstractLearner. This class implements the learn() 
-	and classify() functions using a Random Forest
+	and classify() functions using a Bagging approach
 	"""
 
 	def __init__(self, trainingInputFile, testInputFile, isMachineReadable, outputFile):
@@ -56,7 +56,7 @@ class RandomForestLearner(AbstractLearner):
 		# for each variable and decide to split on the best variable overall.
 		for i in range(len(columns)-1):
 			tuplesList = sorted(zip(columns[i], columns[len(columns)-1]))
-			for j in range(len(tuplesList)):
+			#for j in range(len(tuplesList)):
 				
 			print(tuplesList)
 		

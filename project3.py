@@ -1,6 +1,6 @@
 import sys
 from AbstractLearner import AbstractLearner
-from RandomForestLearner import RandomForestLearner
+from BaggingLearner import BaggingLearner
 
 def main(args):
 	"""
@@ -77,7 +77,7 @@ def learn(trainingInputFile, testInputFile, isMachineReadable, outputFile):
 	new data (which will be written to human_readable_classifier and
 	machine_readable_classifier by main).
 	"""
-	myLearner = RandomForestLearner(trainingInputFile,testInputFile,isMachineReadable,outputFile)
+	myLearner = BaggingLearner(trainingInputFile,testInputFile,isMachineReadable,outputFile)
 	myLearner.learn()
 	return myLearner
 
