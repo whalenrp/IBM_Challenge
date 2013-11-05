@@ -54,8 +54,11 @@ class AbstractLearner:
 		
 		# Process continously valued variables as floats
 		for i in range(len(mResult)):
-			for j in range(len(mResult[i])-1):
-				mResult[i][j] = float(mResult[i][j])
+			for j in range(len(mResult[i])):
+				if j != len(mResult[i])-1: 
+					mResult[i][j] = float(mResult[i][j])
+				else: # Convert final column to booleans
+					mResult[i][j] = True if mResult[i][j] == 'True' else False
 
 		return mResult
 
