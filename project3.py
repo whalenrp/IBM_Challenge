@@ -79,6 +79,7 @@ def learn(trainingInputFile, testInputFile, isMachineReadable, outputFile):
 	"""
 	myLearner = BaggingLearner(trainingInputFile,testInputFile,isMachineReadable,outputFile)
 	myLearner.learn()
+	myLearner.printHumanReadableTree()
 	return myLearner
 
 

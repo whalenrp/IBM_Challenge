@@ -1,0 +1,35 @@
+Training Input Filename : WisconsinBreastCancerDatasets.csv
+Test Input Filename : testInput.txt
+MachineReadable? : True
+Classify Output File outputFile.txt
+Human Readble trees are printed as follows:
+  Node#: True_Probability Column_Identifier Split_Value
+
+  Node# represents the Breadth-First-Search number of this node
+  True_Probability is the likelihood that a piece of data with this
+    classification is true
+  Column_Identifier is the human-readable header for the column this node
+    will split over
+  Split_Value is the value used for splitting. All entries with value
+    < Split_Value will be classified to the left child.
+
+1: 0.32985658409387225 25 888.3
+2: 0.12908777969018934 27 0.4092
+3: 0.956989247311828 3 15.05
+4: 0.09747292418772563 26 2196.0
+5: 0 Leaf_Node 0
+6: 0 Leaf_Node 0
+7: 0 Leaf_Node 0
+8: 0.08178438661710037 19 0.09723
+9: 0 Leaf_Node 0
+10: 0.07677902621722846 12 1.214
+11: 0 Leaf_Node 0
+12: 0.075046904315197 14 0.4956
+13: 1 Leaf_Node 0
+14: 1 Leaf_Node 0
+15: 0.07330827067669173 16 176.5
+16: 0.07156308851224105 24 113.3
+17: 1 Leaf_Node 0
+18: 0 Leaf_Node 0
+19: 0 Leaf_Node 0
+Function not yet Defined

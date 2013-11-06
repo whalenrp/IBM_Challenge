@@ -18,13 +18,13 @@ class AbstractLearner:
 			of this list is a list containing every element of the i'th row
 		testData          - same as trainingData but for test evaluation data
 		"""
+		self.headerList = list()
 		self.trainingInputFile = trainingInputFile 
 		self.testInputFile = testInputFile
 		self.isMachineReadable = isMachineReadable
 		self.outputFile = outputFile
 		self.trainingData = self.__processTrainingInput(self.trainingInputFile)
 		self.testData = self.__processTestInput(self.testInputFile)
-		self.headerList = list()
 
 	def __processTrainingInput(self, filename):
 		"""
@@ -32,20 +32,20 @@ class AbstractLearner:
 		Since IO is expensive, this function is 'private' and should not be called except in
 		constructors.
 		"""
-		mResult = list()
 		mData = open(filename, 'r')
 
-		""" If the first character in the file is '*', save the first row for header info """
+		# If the first character in the file is '*', save the first row for header info 
 		firstChar = mData.read(1)
-		if firstChar is '*':
-			self.headerList = mData.readLine().strip().split()
+		if firstChar == '*':
+			self.headerList = mData.readline().strip().split(',')
 		else:
 			mData.seek(0)
 		
 
-		""" Loop over the file, reading in a line and making every row into a list. """
+		# Loop over the file, reading in a line and making every row into a list. 
 		mLine = mData.readline()
 		rowCount = 0
+		mResult = list()
 		while mLine:
 			mResult.append(list())
 			[mResult[rowCount].append(x) for x in mLine.strip().split(',')]
@@ -58,7 +58,7 @@ class AbstractLearner:
 				if j != len(mResult[i])-1: 
 					mResult[i][j] = float(mResult[i][j])
 				else: # Convert final column to booleans
-					mResult[i][j] = True if mResult[i][j] == 'True' else False
+					mResult[i][j] = True if mResult[i][j].lower() == 'true' else False
 
 		return mResult
 
@@ -71,7 +71,7 @@ class AbstractLearner:
 		mResult = list()
 		mData = open(filename, 'r')
 
-		""" Loop over the file, reading in a line and making every row into a list. """
+		# Loop over the file, reading in a line and making every row into a list. 
 		mLine = mData.readline()
 		rowCount = 0
 		while mLine:
