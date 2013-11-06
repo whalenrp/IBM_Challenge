@@ -73,7 +73,7 @@ def main(args):
 def learn(trainingInputFile, testInputFile, isMachineReadable, outputFile):
 	"""
 	Learn should take in a filepath to the training data (given to main
-	by the flag training_input_file) and return an object which can	classify 
+	by the flag training_input_file) and return an object which can classify 
 	new data (which will be written to human_readable_classifier and
 	machine_readable_classifier by main).
 	"""
