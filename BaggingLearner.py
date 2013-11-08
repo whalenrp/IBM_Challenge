@@ -105,9 +105,9 @@ class BaggingLearner(AbstractLearner):
 				curVote = self.classifyTree(self.testData[i], self.forest[j])
 				#add the vote, either true or false to the count
 				if curVote == True:
-					trueVote = trueVote + 1
+					trueVote += 1
 				else:
-					falseVote = falseVote + 1
+					falseVote += 1
 			#if there are more true votes, write the row to the csv file
 			if trueVote >= falseVote:
 				myWriter.writerow([i])
