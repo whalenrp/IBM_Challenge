@@ -1,0 +1,2 @@
+python project3.py -training_input_file WisconsinBreastCancerDatasets.csv -test_input_file WisconsinBreastCancerTest.csv
+PAUSE

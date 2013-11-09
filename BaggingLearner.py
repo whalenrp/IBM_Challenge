@@ -108,10 +108,12 @@ class BaggingLearner(AbstractLearner):
 					trueVote += 1
 				else:
 					falseVote += 1
-			#if there are more true votes, write the row to the csv file
-			if trueVote >= falseVote:
+					
+			#if there are more true votes (weighted), write the row to the csv file
+			if trueVote*15 >= falseVote:
 				myWriter.writerow([i])
 				print i
+            
 		sys.exit(0)
 
 	
