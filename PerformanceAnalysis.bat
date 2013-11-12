@@ -1,2 +1,2 @@
-python CrossValidator.py
+python PerformanceAnalysis.py
 PAUSE
